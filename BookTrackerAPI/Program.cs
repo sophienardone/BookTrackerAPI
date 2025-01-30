@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using BookTrackerAPI.Models;
+using System.Text.Json.Serialization;
 
 namespace BookTrackerAPI
 {
@@ -9,7 +12,12 @@ namespace BookTrackerAPI
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            });
+            builder.Services.AddDbContext<BooksContext>(opt =>
+            opt.UseInMemoryDatabase("BookTracker"));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
