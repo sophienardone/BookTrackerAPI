@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace BookTrackerAPI.Models
 {
@@ -22,8 +23,20 @@ namespace BookTrackerAPI.Models
              new User
              {
                  Id = 1,
-                 Username = "Saoirse McGuinness",
+                 Username = "Saoirsemcg",
                  Email = "Saoirsemcg@yahoo.ie"
+             },
+             new User
+             {
+                 Id = 2,
+                 Username = "Shaunac",
+                 Email = "ShaunaCooney@gmail.com"
+             },
+             new User
+             {
+                 Id = 3,
+                 Username = "Sophienardone",
+                 Email = "Sophien25@gmail.com"
              }
                 );
 
@@ -32,10 +45,37 @@ namespace BookTrackerAPI.Models
                 {
                     BookId = 1,
                     Title = "Call me By your Name",
-                    Description = "",
+                    Description = "The novel centers on the sudden and powerful romance that blossoms between Elio and Oliver",
                     Author = "Andre Aciman",
                     Genre = "Romance",
                     PagesRead = 1,
+                },
+                new Book
+                {
+                    BookId = 2,
+                    Title = "Normal People",
+                    Description = "The novel follows the complex friendship and relationship between two teenagers from different social classes, Connell and Marianne",
+                    Author = "Sally Rooney",
+                    Genre = "Romance",
+                    PagesRead = 150,
+                },
+                new Book
+                {
+                    BookId = 3,
+                    Title = "Poor",
+                    Description = "Her candid book exposes the harsh realities of growing up in a household plagued by addiction, abuse, and financial hardship",
+                    Author = "Katriona O'Sullivan",
+                    Genre = "Autobiography",
+                    PagesRead = 300,
+                },
+                new Book
+                {
+                    BookId = 4,
+                    Title = "The Fault in Our Stars",
+                    Description = "",
+                    Author = "John Greene",
+                    Genre = "",
+                    PagesRead = 204
                 }
                 );
 
@@ -47,6 +87,22 @@ namespace BookTrackerAPI.Models
                     UserId = 1,
                     PagesRead = 100,
                     LastUpdated = DateTime.Now
+                },
+                new UserProgress 
+                {
+                    Id=2,
+                    BookId = 2,
+                    UserId = 2,
+                    PagesRead= 46,
+                    LastUpdated = DateTime.Now
+                },
+                new UserProgress
+                {
+                    Id=3,
+                    BookId = 3,
+                    UserId = 3,
+                    PagesRead= 57,
+                    LastUpdated = DateTime.Now
                 }
                 );
 
@@ -57,7 +113,23 @@ namespace BookTrackerAPI.Models
                     UserId = 1,
                     BookId = 1,
                     Rating = 5,
-                    Comment = "The novel centers on the sudden and powerful romance between Elio and Oliver"
+                    Comment = "Great book. Couldn't put it down!"
+                },
+                new Review
+                {
+                    Id = 2,
+                    UserId = 2,
+                    BookId = 2,
+                    Rating = 4,
+                    Comment = "Fantastic Book."
+                },
+                new Review
+                { 
+                Id = 3,
+                    UserId = 3,
+                    BookId = 3,
+                    Rating = 5,
+                    Comment = "Even better than the film!"
                 }
                 );
 
