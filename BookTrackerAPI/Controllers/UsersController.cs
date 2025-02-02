@@ -22,9 +22,33 @@ namespace BookTrackerAPI.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
+
         {
-            return await _context.Users.ToListAsync();
+            var users = await _context.Users
+       .Include(u => u.UserProgress)
+       .Include(u => u.Reviews)
+       .Select(u => new UserDTO
+       {
+           Id = u.Id,
+           Username = u.Username,
+           Email = u.Email,
+           UserProgress = u.UserProgress.Select(up => new UserProgressDTO
+           {
+               BookId = up.BookId,
+               PagesRead = up.PagesRead,
+               LastUpdated = up.LastUpdated
+           }).ToList(),
+           Reviews = u.Reviews.Select(r => new ReviewDTO
+           {
+               BookId = r.BookId,
+               Rating = r.Rating,
+               Comment = r.Comment
+           }).ToList()
+       })
+        .ToListAsync();
+
+            return Ok(users);
         }
 
         // GET: api/Users/5
