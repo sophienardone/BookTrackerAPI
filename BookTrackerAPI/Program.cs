@@ -14,7 +14,8 @@ namespace BookTrackerAPI
 
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
-                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.WriteIndented = true;
             });
             builder.Services.AddDbContext<BooksContext>(opt =>
             opt.UseInMemoryDatabase("BookTracker"));
