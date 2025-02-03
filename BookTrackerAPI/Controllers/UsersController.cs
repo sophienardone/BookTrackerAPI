@@ -28,24 +28,7 @@ namespace BookTrackerAPI.Controllers
             var users = await _context.Users
        .Include(u => u.UserProgress)
        .Include(u => u.Reviews)
-       .Select(u => new UserDTO
-       {
-           Id = u.Id,
-           Username = u.Username,
-           Email = u.Email,
-           UserProgress = u.UserProgress.Select(up => new UserProgressDTO
-           {
-               BookId = up.BookId,
-               PagesRead = up.PagesRead,
-               LastUpdated = up.LastUpdated
-           }).ToList(),
-           Reviews = u.Reviews.Select(r => new ReviewDTO
-           {
-               BookId = r.BookId,
-               Rating = r.Rating,
-               Comment = r.Comment
-           }).ToList()
-       })
+       .Select(u => MapToDTO(u))
         .ToListAsync();
 
             return Ok(users);
@@ -55,27 +38,46 @@ namespace BookTrackerAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users
+
+                .Include(u => u.UserProgress)
+                .Include(u => u.Reviews)
+                .Where(u => u.Id == id)
+                .Select(u => MapToDTO(u))
+            .FirstOrDefaultAsync();
+
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return Ok(user);
         }
 
-        // PUT: api/Users/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutUser(int id, UserDTO userDto)
         {
-            if (id != user.Id)
+            if (id != userDto.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            var user = await _context.Users
+                .Include(u => u.UserProgress)
+                .Include(u => u.Reviews)
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Username = userDto.Username;
+            user.Email = userDto.Email;
+
 
             try
             {
@@ -96,27 +98,43 @@ namespace BookTrackerAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+
+
+
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> PostUser(UserDTO userDto)
         {
+            var user = new User
+            {
+                Username = userDto.Username,
+                Email = userDto.Email
+            };
             _context.Users.Add(user);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
 
+
+
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users
+        .Include(u => u.UserProgress)
+        .Include(u => u.Reviews)
+        .FirstOrDefaultAsync(u => u.Id == id);
+
             if (user == null)
             {
                 return NotFound();
             }
 
+            _context.UserProgresses.RemoveRange(user.UserProgress);
+            _context.Reviews.RemoveRange(user.Reviews);
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
@@ -127,5 +145,29 @@ namespace BookTrackerAPI.Controllers
         {
             return _context.Users.Any(e => e.Id == id);
         }
+
+        //helper method to map to UserDTO
+        private static UserDTO MapToDTO(User user)
+        {
+            return new UserDTO
+            {
+                Id = user.Id,
+                Username = user.Username,
+                Email = user.Email,
+                UserProgress = user.UserProgress.Select(up => new UserProgressDTO
+                {
+                    BookId = up.BookId,
+                    PagesRead = up.PagesRead,
+                    LastUpdated = up.LastUpdated
+                }).ToList(),
+                Reviews = user.Reviews.Select(r => new ReviewDTO
+                {
+                    BookId = r.BookId,
+                    Rating = r.Rating,
+                    Comment = r.Comment
+                }).ToList()
+            };
+        }
     }
+
 }
