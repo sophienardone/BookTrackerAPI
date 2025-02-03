@@ -72,9 +72,9 @@ namespace BookTrackerAPI.Models
                 {
                     BookId = 4,
                     Title = "The Fault in Our Stars",
-                    Description = "",
+                    Description = "The story is narrated by Hazel Grace Lancaster, a 16-year-old girl with thyroid cancer.",
                     Author = "John Greene",
-                    Genre = "",
+                    Genre = "Young adult",
                     PagesRead = 204
                 }
                 );
