@@ -14,6 +14,7 @@ namespace BookTrackerAPI
 
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
+                //https://stackoverflow.com/questions/65163728/how-to-json-serialize-without-cyclic-error
                 options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                 options.JsonSerializerOptions.WriteIndented = true;
             });
