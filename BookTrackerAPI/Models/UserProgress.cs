@@ -8,8 +8,8 @@
         public int PagesRead {  get; set; }
         public DateTime LastUpdated { get; set; }
 
-        public User User { get; set; }
-        public Book book { get; set; }
+        public User? User { get; set; }
+        public Book? book { get; set; }
 
     }
 }
