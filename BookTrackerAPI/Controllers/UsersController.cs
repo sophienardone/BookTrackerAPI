@@ -26,8 +26,8 @@ namespace BookTrackerAPI.Controllers
 
         {
             var users = await _context.Users
-       .Include(u => u.UserProgress)
-       .Include(u => u.Reviews)
+       .Include(u => u.UserProgress).ThenInclude(up => up.book)
+       .Include(u => u.Reviews).Include(u => u.Reviews).ThenInclude(r => r.Book)
        .Select(u => MapToDTO(u))
         .ToListAsync();
 
@@ -158,13 +158,16 @@ namespace BookTrackerAPI.Controllers
                 {
                     BookId = up.BookId,
                     PagesRead = up.PagesRead,
-                    LastUpdated = up.LastUpdated
+                    LastUpdated = up.LastUpdated,
+                    UserName = user.Username,
+                    Title = up.book?.Title
                 }).ToList(),
                 Reviews = user.Reviews.Select(r => new ReviewDTO
                 {
                     BookId = r.BookId,
                     Rating = r.Rating,
-                    Comment = r.Comment
+                    Comment = r.Comment,
+                    Title = r.Book?.Title
                 }).ToList()
             };
         }
