@@ -129,7 +129,7 @@ namespace BookTrackerAPI.Models
                     UserId = 3,
                     BookId = 3,
                     Rating = 5,
-                    Comment = "Even better than the film!"
+                    Comment = "Even better than the film"
                 }
                 );
 
