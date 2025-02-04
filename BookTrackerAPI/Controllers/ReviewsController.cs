@@ -29,15 +29,12 @@ namespace BookTrackerAPI.Controllers
                 .Include(r => r.Book)
                  .Select(r => new ReviewDTO
                  {
-                     
+
                      BookId = r.BookId,
                      Rating = r.Rating,
                      Comment = r.Comment,
                      Title = r.Book != null ? r.Book.Title : null
                  })
-
-
-
                 .ToListAsync();
 
             return Ok(reviews);
@@ -56,7 +53,7 @@ namespace BookTrackerAPI.Controllers
             BookId = r.BookId,
             Rating = r.Rating,
             Comment = r.Comment,
-            Title = r.Book != null ? r.Book.Title : null 
+            Title = r.Book != null ? r.Book.Title : null
         })
         .FirstOrDefaultAsync();
 
