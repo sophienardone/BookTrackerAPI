@@ -20,25 +20,52 @@ namespace BookTrackerAPI.Controllers
             _context = context;
         }
 
+        //Can't get this method to call in postman (404 error)
         // GET: api/Reviews
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
+        public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetReviews()
         {
-            return await _context.Reviews.ToListAsync();
+            var reviews = await _context.Reviews
+                .Include(r => r.Book)
+                 .Select(r => new ReviewDTO
+                 {
+                     
+                     BookId = r.BookId,
+                     Rating = r.Rating,
+                     Comment = r.Comment,
+                     Title = r.Book != null ? r.Book.Title : null
+                 })
+
+
+
+                .ToListAsync();
+
+            return Ok(reviews);
         }
 
         // GET: api/Reviews/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Review>> GetReview(int id)
         {
-            var review = await _context.Reviews.FindAsync(id);
+            var review = await _context.Reviews
+        .Include(r => r.Book)
+        .Include(r => r.User)
+        .Where(r => r.Id == id)
+        .Select(r => new ReviewDTO
+        {
+            BookId = r.BookId,
+            Rating = r.Rating,
+            Comment = r.Comment,
+            Title = r.Book != null ? r.Book.Title : null 
+        })
+        .FirstOrDefaultAsync();
 
             if (review == null)
             {
                 return NotFound();
             }
 
-            return review;
+            return Ok(review);
         }
 
         // PUT: api/Reviews/5
@@ -103,5 +130,12 @@ namespace BookTrackerAPI.Controllers
         {
             return _context.Reviews.Any(e => e.Id == id);
         }
+
+        [HttpGet("test")]
+        public ActionResult<string> Test()
+        {
+            return "ReviewsController is working";
+        }
+
     }
 }
