@@ -40,6 +40,8 @@ namespace BookTrackerAPI
 
             app.MapControllers();
 
+            app.UseMiddleware<ApiKeyMiddleware>(); //registers the middleware api key
+
             app.Run();
         }
     }
