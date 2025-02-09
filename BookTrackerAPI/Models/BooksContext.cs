@@ -124,8 +124,8 @@ namespace BookTrackerAPI.Models
                     Comment = "Fantastic Book."
                 },
                 new Review
-                { 
-                Id = 3,
+                {
+                    Id = 3,
                     UserId = 3,
                     BookId = 3,
                     Rating = 5,
