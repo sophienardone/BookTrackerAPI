@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "577ea351-8576-4eee-96d9-91f02cfd1653",
+		"name": "UserProgressesController",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41301185"
+	},
+	"item": [
+		{
+			"name": "Get all UsesProgresses",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "BbOoKtRaCKeRKey1962",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7209/api/UserProgresses",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7209",
+					"path": [
+						"api",
+						"UserProgresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific user progress by Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "BbOoKtRaCKeRKey1962",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7209/api/UserProgresses/4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7209",
+					"path": [
+						"api",
+						"UserProgresses",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new User Progress",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "BbOoKtRaCKeRKey1962",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"bookId\": 4,\r\n    \"pagesRead\": 100,\r\n    \"lastUpdated\": \"2025-02-03T15:50:56.2114046+00:00\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7209/api/UserProgresses",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7209",
+					"path": [
+						"api",
+						"UserProgresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a user progress",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "BbOoKtRaCKeRKey1962",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"userId\": 1,\r\n    \"bookId\": 4,\r\n    \"pagesRead\": 120,\r\n    \"lastUpdated\": \"2025-02-04T15:50:56.2114046+00:00\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7209/api/UserProgresses/4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7209",
+					"path": [
+						"api",
+						"UserProgresses",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a user progress",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "BbOoKtRaCKeRKey1962",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7209/api/UserProgresses/4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7209",
+					"path": [
+						"api",
+						"UserProgresses",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

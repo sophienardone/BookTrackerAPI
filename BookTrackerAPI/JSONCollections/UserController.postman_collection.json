@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "8e288844-3d84-4402-bb0a-43427ed3519d",
+		"name": "UserController",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41301185"
+	},
+	"item": [
+		{
+			"name": "Get all Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-KEY",
+						"value": "BbOoKtRaCKeRKey1962",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7209/api/Users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7209",
+					"path": [
+						"api",
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a User by their ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "BbOoKtRaCKeRKey1962",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7209/api/Users/3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7209",
+					"path": [
+						"api",
+						"Users",
+						"3"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a new User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "BbOoKtRaCKeRKey1962",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"newuser\",\r\n  \"email\": \"newuser@gmail.com\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7209/api/Users",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7209",
+					"path": [
+						"api",
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User info by id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "BbOoKtRaCKeRKey1962",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 4,\r\n  \"username\": \"updatedUsername\",\r\n  \"email\": \"updated@gmail.com\",\r\n  \"userProgress\": [],\r\n  \"reviews\": []\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7209/api/Users/4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7209",
+					"path": [
+						"api",
+						"Users",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a User by their ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "BbOoKtRaCKeRKey1962",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7209/api/Users/4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7209",
+					"path": [
+						"api",
+						"Users",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
